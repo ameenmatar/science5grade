@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الاختبار التشخيصي - الصف الخامس</title>
+    <title>الاختبار التشخيصي - علوم الرابع الأساسي</title>
     <!-- استدعاء Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- استدعاء SheetJS لتصدير الإكسل -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #f3f4f6; padding: 20px; }
         .hidden { display: none !important; }
@@ -27,7 +27,7 @@
         .flag-wrapper {
             position: relative;
             background: linear-gradient(to bottom, #000000 33.33%, #ffffff 33.33%, #ffffff 66.66%, #16a34a 66.66%);
-            padding: 24px; /* سماكة الإطار */
+            padding: 24px;
             border-radius: 1.5rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
@@ -38,10 +38,10 @@
             content: '';
             position: absolute;
             top: 0;
-            right: 0; /* لأن الاتجاه من اليمين لليسار، نضعه على اليمين ليكون بوضعية السارية */
+            right: 0;
             width: 120px;
             height: 100%;
-            background-color: #dc2626; /* أحمر */
+            background-color: #dc2626;
             clip-path: polygon(100% 0, 0 50%, 100% 100%);
             z-index: 1;
         }
@@ -52,7 +52,7 @@
             z-index: 10;
             background-color: white;
             border-radius: 1rem;
-            min-h: 85vh;
+            min-height: 85vh;
             overflow: hidden;
         }
     </style>
@@ -63,22 +63,22 @@
     <div class="max-w-5xl mx-auto mt-4 mb-10 flag-wrapper">
         
         <!-- المحتوى الداخلي -->
-        <div class="content-container keffiyeh-pattern p-8">
+        <div class="content-container keffiyeh-pattern p-4 md:p-8">
             
             <!-- الترويسة -->
-            <div class="text-center mb-10 bg-white/95 p-6 rounded-lg shadow-md border-2 border-gray-200">
+            <div id="header-section" class="text-center mb-10 bg-white/95 p-6 rounded-lg shadow-md border-2 border-gray-200">
                 <h1 class="text-3xl font-bold text-gray-800 mb-2">مدرسة ذكور طمون الأساسية العليا</h1>
-                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث العلوم والحياة للصف الخامس الأساسي</h2>
+                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث العلوم والحياة للصف الرابع الأساسي</h2>
             </div>
 
             <!-- شاشة اختيار نوع الدخول -->
             <div id="role-selection" class="flex flex-col items-center justify-center bg-white p-10 rounded-xl shadow-lg border border-gray-100">
                 <h3 class="text-2xl font-bold mb-8 text-gray-700">بوابة الدخول للاختبار</h3>
                 <div class="flex flex-col md:flex-row gap-6 w-full justify-center">
-                    <button onclick="showSection('student-login')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg shadow-md transition text-xl">
+                    <button type="button" onclick="showSection('student-login')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg shadow-md transition text-xl cursor-pointer">
                         دخول الطلاب
                     </button>
-                    <button onclick="showSection('teacher-login')" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-4 px-12 rounded-lg shadow-md transition text-xl">
+                    <button type="button" onclick="showSection('teacher-login')" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-4 px-12 rounded-lg shadow-md transition text-xl cursor-pointer">
                         دخول المعلم
                     </button>
                 </div>
@@ -97,13 +97,13 @@
                     </select>
                 </div>
                 <div class="flex gap-4 mt-8">
-                    <button onclick="checkTestAndStart()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-lg shadow transition text-lg">بدء الاختبار الآن</button>
-                    <button onclick="showSection('role-selection')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-10 rounded-lg transition text-lg">عودة</button>
+                    <button type="button" onclick="checkTestAndStart()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-lg shadow transition text-lg cursor-pointer">بدء الاختبار الآن</button>
+                    <button type="button" onclick="showSection('role-selection')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-10 rounded-lg transition text-lg cursor-pointer">عودة</button>
                 </div>
                 <p id="student-error" class="text-red-500 mt-4 font-bold text-lg hidden"></p>
             </div>
 
-            <!-- شاشة دخول المعلم -->
+            <!-- شاشة دخول المعلم (محمية) -->
             <div id="teacher-login" class="hidden flex flex-col items-center bg-white p-10 rounded-xl shadow-lg border border-gray-100">
                 <h3 class="text-2xl font-bold mb-6 text-gray-800">بوابة الإدارة المركزية (خاص بالمعلم)</h3>
                 <div class="w-full max-w-md space-y-5">
@@ -111,8 +111,8 @@
                     <input type="password" id="teacher-password" placeholder="كلمة المرور..." class="border-2 border-gray-300 p-4 rounded-lg w-full text-center focus:outline-none focus:border-gray-500 font-bold text-lg" dir="ltr">
                 </div>
                 <div class="flex gap-4 mt-8">
-                    <button onclick="loginTeacher()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg shadow transition text-lg">تسجيل الدخول</button>
-                    <button onclick="showSection('role-selection')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-10 rounded-lg transition text-lg">عودة</button>
+                    <button type="button" onclick="loginTeacher()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg shadow transition text-lg cursor-pointer">تسجيل الدخول</button>
+                    <button type="button" onclick="showSection('role-selection')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-10 rounded-lg transition text-lg cursor-pointer">عودة</button>
                 </div>
                 <p id="teacher-error" class="text-red-500 mt-4 font-bold text-lg hidden">البريد الإلكتروني أو كلمة المرور غير صحيحة!</p>
             </div>
@@ -133,13 +133,13 @@
                 
                 <!-- تعليمات الأسئلة -->
                 <div class="mb-4 bg-yellow-50 border border-yellow-300 p-4 rounded-lg text-yellow-800 font-bold text-center">
-                    يتكون الاختبار من 25 سؤالاً. كل سؤال بـ 4 علامات (المجموع الكلي 100).
+                    يتكون الاختبار من 40 سؤالاً. كل سؤال بـ 2.5 علامة (المجموع الكلي 100).
                 </div>
 
-                <div id="questions-container" class="space-y-6 mb-8 bg-white p-6 rounded-lg border border-gray-100"></div>
+                <div id="questions-container" class="space-y-6 mb-8 bg-white p-2 md:p-6 rounded-lg border border-gray-100"></div>
                 
                 <div class="text-center pb-6">
-                    <button onclick="submitTest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-20 rounded-lg shadow-lg text-2xl transition border-b-4 border-green-800">تسليم الإجابات</button>
+                    <button type="button" onclick="submitTest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-20 rounded-lg shadow-lg text-2xl transition border-b-4 border-green-800 cursor-pointer">تسليم الإجابات</button>
                 </div>
             </div>
 
@@ -151,14 +151,14 @@
                     <span id="final-score" class="text-6xl font-bold text-green-700"></span><span class="text-3xl text-green-700 font-bold"> / 100</span>
                 </div>
                 <br>
-                <button onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-12 rounded-lg text-xl shadow-md">العودة للرئيسية</button>
+                <button type="button" onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-12 rounded-lg text-xl shadow-md cursor-pointer">العودة للرئيسية</button>
             </div>
 
             <!-- لوحة تحكم المعلم -->
-            <div id="teacher-dashboard" class="hidden bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <div id="teacher-dashboard" class="hidden bg-white p-4 md:p-8 rounded-xl shadow-lg border border-gray-100">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-gray-200 pb-6 gap-4">
                     <h3 class="text-3xl font-bold text-gray-800">لوحة تحكم المعلم أ. أبوطلال</h3>
-                    <button onclick="location.reload()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition shadow-md text-lg">خروج</button>
+                    <button type="button" onclick="location.reload()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition shadow-md text-lg cursor-pointer">خروج</button>
                 </div>
 
                 <!-- إعدادات الاختبار -->
@@ -174,7 +174,7 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <label class="font-bold text-gray-700 text-lg">مدة الاختبار (بالدقائق):</label>
-                            <input type="number" id="test-duration-input" min="1" max="120" value="30" class="w-24 p-2 border-2 border-gray-300 rounded-lg text-center font-bold text-lg focus:outline-none focus:border-blue-500" onchange="saveTestSettings()">
+                            <input type="number" id="test-duration-input" min="1" max="120" value="40" class="w-24 p-2 border-2 border-gray-300 rounded-lg text-center font-bold text-lg focus:outline-none focus:border-blue-500" onchange="saveTestSettings()">
                         </div>
                         <span id="settings-saved-msg" class="text-green-600 font-bold text-lg hidden">تم الحفظ ✓</span>
                     </div>
@@ -183,9 +183,9 @@
                 <!-- قسم النتائج والتصدير -->
                 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     <h4 class="text-2xl font-bold text-gray-700">سجل نتائج الطلاب (للشعب الثلاث)</h4>
-                    <div class="flex gap-3">
-                        <button onclick="exportAdvancedExcel()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-lg">تصدير إكسل ذكي (علامات + تحليل)</button>
-                        <button onclick="clearData()" class="bg-gray-800 hover:bg-black text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-lg">مسح النتائج</button>
+                    <div class="flex gap-3 flex-wrap justify-center">
+                        <button type="button" onclick="exportAdvancedExcel()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-sm md:text-lg cursor-pointer">تصدير إكسل ذكي (علامات + تحليل)</button>
+                        <button type="button" onclick="clearData()" class="bg-gray-800 hover:bg-black text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-sm md:text-lg cursor-pointer">مسح النتائج</button>
                     </div>
                 </div>
 
@@ -194,338 +194,344 @@
                         <thead class="bg-gray-800 text-white">
                             <tr>
                                 <th class="py-4 px-4 text-right">الرقم</th>
-                                <th class="py-4 px-4 text-right">الاسم الثلاثي</th>
+                                <th class="py-4 px-4 text-right">اسم الطالب</th>
                                 <th class="py-4 px-4 text-center">الشعبة</th>
-                                <th class="py-4 px-4 text-center">العلامة (من 100)</th>
-                                <th class="py-4 px-4 text-right">وقت التقديم</th>
+                                <th class="py-4 px-4 text-center">العلامة</th>
+                                <th class="py-4 px-4 text-center">تاريخ التقديم</th>
                             </tr>
                         </thead>
                         <tbody id="results-table-body" class="divide-y divide-gray-200 font-bold">
-                            <!-- النتائج تظهر هنا -->
+                            <!-- سيتم تعبئة النتائج هنا عن طريق جافاسكريبت -->
                         </tbody>
                     </table>
                 </div>
-                <p id="no-data-msg" class="text-center text-gray-500 mt-8 hidden font-bold text-xl">لا توجد نتائج مسجلة حتى الآن.</p>
             </div>
+
         </div>
     </div>
 
     <script>
-        // بنك الأسئلة الشامل (25 سؤال مقسمة لـ 5 مجالات)
-        const categories = [
-            "الكائنات الحية والبيئة",
-            "المادة وخصائصها",
-            "جسم الإنسان",
-            "الفيزياء (الضوء، الصوت، القوى)",
-            "الأرض والفضاء"
+        // 40 سؤالاً مميزاً لمنهاج العلوم للصف الرابع الأساسي (الفصلين الأول والثاني)
+        const fullQuestions = [
+            { q: "1. ما هو العضو المسؤول عن ضخ الدم في جسم الإنسان؟", options: ["المعدة", "القلب", "الرئتين", "الكبد"], a: 1 },
+            { q: "2. ما هي الحساسية التي نستخدم فيها الأذن؟", options: ["البصر", "الشم", "السمع", "الذوق"], a: 2 },
+            { q: "3. أي من النباتات التالية يعتبر جذراً خزائياً نأكله؟", options: ["الخس", "الجزر", "البطاطس", "البقدونس"], a: 1 },
+            { q: "4. ما الغاز الذي ينتجه النبات بعملية البناء الضوئي؟", options: ["ثاني أكسيد الكربون", "الأكسجين", "النيتروجين", "الهيدروجين"], a: 1 },
+            { q: "5. ما حالة الماء عند درجة حرارة صفر مئوية (في الظروف العادية)؟", options: ["غازية", "سائلة", "صلبة (جليد)", "بلازما"], a: 2 },
+            { q: "6. ما هو المصدر الرئيسي للطاقة على كوكب الأرض؟", options: ["القمح", "الشمس", "الرياح", "الماء"], a: 1 },
+            { q: "7. ما اسم الكوكب الذي نعيش عليه؟", options: ["المريخ", "عطارد", "الأرض", "الزهرة"], a: 2 },
+            { q: "8. ما هي القوة التي تسحب الأشياء نحو الأسفل نحو مركز الأرض؟", options: ["الاحتكاك", "الجاذبية الأرضية", "المغناطيسية", "الدفعة"], a: 1 },
+            { q: "9. أي المواد التالية تعتبر موصلاً جيداً للكهرباء؟", options: ["الخشب", "الحديد", "البلاستيك", "الزجاج"], a: 1 },
+            { q: "10. كم عدد الحواس الخمس لدى الإنسان؟", options: ["3", "4", "5", "6"], a: 2 },
+            { q: "11. ما الجزء المسؤول عن امتصاص الماء والملامح الغذائية من التربة في النبات؟", options: ["الأوراق", "الساق", "الجذور", "الزهور"], a: 2 },
+            { q: "12. تحول المادة من الحالة السائلة إلى الحالة الغازية يسمى:", options: ["تبخر", "تكاثف", "انصهار", "تجمد"], a: 0 },
+            { q: "13. تحول بخار الماء إلى قطرات ماء عند ملامسة سطح بارد يسمى:", options: ["تبخر", "تكاثف", "انصهار", "ذوبان"], a: 1 },
+            { q: "14. أي من الحيوانات التالية يعتبر من الطيور؟", options: ["الخفاش", "اليمامة", "التمساح", "الضفدع"], a: 1 },
+            { q: "15. ما هي وحدة قياس الطول الأساسية؟", options: ["الجرام", "المتر", "اللتر", "الثانية"], a: 1 },
+            { q: "16. ما هو الغاز الذي يستنشقه الإنسان من الجو ليتنفس؟", options: ["ثاني أكسيد الكربون", "الأكسجين", "النيتروجين", "الهيليوم"], a: 1 },
+            { q: "17. الحيوانات التي تتغذى على اللحوم فقط تسمى:", options: ["آكلات الأعشاب", "آكلات اللحوم (الحوارف)", "المحللات", "القوارض"], a: 1 },
+            { q: "18. ما هي صخرة الأرض الصلبة التي تشكل القشرة الخارجية؟", options: ["الماء", "الصخور والمعادن", "الهواء", "الغيوم"], a: 1 },
+            { q: "19. أي الأشكال التالية يعبر عن مسار انتقال الضوء؟", options: ["خطوط منحنية", "خطوط مستقيمة", "دوائر متداخلة", "أمواج دائرية"], a: 1 },
+            { q: "20. المواد التي لا تسمح للضوء بالمرور من خلالها تسمى:", options: ["شفافة", "معتمة", "نصف شفافة", "ملونة"], a: 1 },
+            { q: "21. ما هو الكوكب الأقرب إلى الشمس في المجموعة الشمسية؟", options: ["الأرض", "عطارد", "المريخ", "زحل"], a: 1 },
+            { q: "22. ما هي الظاهرة التي تنتج عن دوران الأرض حول نفسها أمام الشمس؟", options: ["الفصول الأربعة", "الليل والنهار", "الخسوف", "الكسوف"], a: 1 },
+            { q: "23. كم عدد الكواكب السيّارة في المجموعة الشمسية؟", options: ["7", "8", "9", "10"], a: 1 },
+            { q: "24. أي من الآتي يعتبر مصدراً طبيعياً للماء العذب؟", options: ["البحر الميت", "المحيط الأطلسي", "الأنهار", "الخليج"], a: 2 },
+            { q: "25. ما هو الجزء المسؤول عن صنع الغذاء في النبات (عملية البناء الضوئي)؟", options: ["الجذر", "الساق", "الورقة", "الزهرة"], a: 2 },
+            { q: "26. الأداة المستخدمة لقياس درجات الحرارة هي:", options: ["الميزان", "ميزان الحرارة (الثيرمومتر)", "المتر الشريطى", "الساعة"], a: 1 },
+            { q: "27. القوة الناتجة عن تلامس السطوح وتؤدي إلى إبطاء حركة الأجسام هي:", options: ["الجاذبية", "الاحتكاك", "المغناطيسية", "الكهرباء"], a: 1 },
+            { q: "28. ماذا يغطي جسم السمكة ليحميها؟", options: ["الريش", "الشعر", "الحراشف (القشور)", "الصوف"], a: 2 },
+            { q: "29. الحيوانات التي تتولد وتلد وتُرضع أطفالها بالحليب تسمى:", options: ["الطيور", "الزواحف", "الثدييات", "البرمائيات"], a: 2 },
+            { q: "30. ما هي الفصول الأربعة الناتجة عن دوران الأرض حول الشمس؟", options: ["شتاء، ربيع، صيف، خريف", "ليل، نهار، شروق، غروب", "مطر، ثلج، ريح، شمس", "سماء، أرض، بحر، بر"], a: 0 },
+            { q: "31. المادة التي تنتشر وتاخد شكل الوعاء وتملؤه تماماً هي المادة:", options: ["الصلبة", "السائلة", "الغازية", "الجامدة"], a: 2 },
+            { q: "32. أي من المعادن التالية يعد مغناطيسياً ويجذبه المغناطيس بقوة؟", options: ["الذهب", "الحديد", "الألومنيوم", "النحاس"], a: 1 },
+            { q: "33. ما هو العضو الرئيسي المسؤول عن عملية التفكير والتحكم بأعضاء الجسم؟", options: ["القلب", "الدماغ (المخ)", "المعدة", "الكلية"], a: 1 },
+            { q: "34. النباتات التي تنتج أزهاراً ثم تحولها لثمار بداخلها بذور تسمى:", options: ["نباتات زهرية", "السرخسيات", "الصنوبريات", "الطحالب"], a: 0 },
+            { q: "35. الصوت الرفيع (الذي تقترن ترداداته بالعالية) يسمى صوتاً:", options: ["غليظاً", "حاداً أو رفيعاً", "منخفضاً", "خافتاً"], a: 1 },
+            { q: "36. ما اسم حركة الأرض حول محورها والتي تستغرق 24 ساعة؟", options: ["دورة سنوية", "دورة يومية", "دورة شهرية", "دورة فصلية"], a: 1 },
+            { q: "37. أي مما يلي يعد من المخلفات الضارة بالبيئة والتي لا تحلل بسهولة؟", options: ["قشور الأوراق", "الأكياس البلاستيكية", "بقايا الطعام", "الكرتون"], a: 1 },
+            { q: "38. ما هي النجوم الكبيرة المشتعلة بذاتها في السماء؟", options: ["الكواكب", "الأقمار", "النجوم والشمس", "المذنبات"], a: 2 },
+            { q: "39. الأداة المستخدمة لقياس كتلة الأجسام (وزنها بمعناها الدارج) هي:", options: ["الميزان ذو الكفتين", "المطرة", "المسطرة", "الساعة"], a: 0 },
+            { q: "40. من أين تكتسب أقمار الكواكب (مثل قمر الأرض) ضوءها ونورها ليلاً؟", options: ["من نفسها", "من انعكاس ضوء الشمس عليها", "من النجوم البعيدة", "من كوكب المشتري"], a: 1 }
         ];
 
-        const questions = [
-            // المجال 1: الكائنات الحية والبيئة (5 أسئلة)
-            { id: 1, category: categories[0], text: "ما هو الجزء المسؤول عن تثبيت النبات في التربة وامتصاص الماء والأملاح؟", options: ["الساق", "الأوراق", "الجذر", "الزهرة"], answer: 2 },
-            { id: 2, category: categories[0], text: "الكائنات الحية التي تعتمد على نفسها في صنع غذائها تُسمى:", options: ["المنتجات", "المستهلكات", "المحللات", "الطفيليات"], answer: 0 },
-            { id: 3, category: categories[0], text: "يُسمى المكان الذي تعيش فيه الكائنات الحية وتتفاعل فيه مع المكونات غير الحية بـ:", options: ["الموطن", "النظام البيئي", "الغلاف الجوي", "المجتمع الحيوي"], answer: 1 },
-            { id: 4, category: categories[0], text: "أي من الحيوانات الآتية يعيش في البيئة الصحراوية وتكيف مع قلة الماء؟", options: ["الدب القطبي", "الجمل", "البطريق", "الضفدع"], answer: 1 },
-            { id: 5, category: categories[0], text: "الكائنات التي تقوم بتحليل جثث الحيوانات والنباتات الميتة تسمى:", options: ["المفترسات", "المنتجات", "المحللات", "الطيور"], answer: 2 },
-            
-            // المجال 2: المادة وخصائصها (5 أسئلة)
-            { id: 6, category: categories[1], text: "المادة التي تأخذ شكل الوعاء الذي توضع فيه ويبقى حجمها ثابتاً، تكون في الحالة:", options: ["الصلبة", "السائلة", "الغازية", "البلازما"], answer: 1 },
-            { id: 7, category: categories[1], text: "تُسمى عملية تحول الماء من الحالة السائلة إلى الحالة الغازية عند تسخينه بـ:", options: ["التجمد", "الانصهار", "التبخر", "التكثف"], answer: 2 },
-            { id: 8, category: categories[1], text: "العملية التي يتحول فيها الثلج (صلب) إلى ماء (سائل) تسمى:", options: ["التبخر", "التجمد", "الانصهار", "التكثف"], answer: 2 },
-            { id: 9, category: categories[1], text: "الأداة المستخدمة لقياس كتلة الأجسام بدقة هي:", options: ["الميزان ذو الكفتين", "المتر الشريطي", "مقياس الحرارة", "المخبار المدرج"], answer: 0 },
-            { id: 10, category: categories[1], text: "أي من المواد الآتية يُعتبر موصلاً جيداً للتيار الكهربائي والحرارة؟", options: ["الخشب", "النحاس", "البلاستيك", "الزجاج"], answer: 1 },
-
-            // المجال 3: جسم الإنسان (5 أسئلة)
-            { id: 11, category: categories[2], text: "الحيوانات التي يغطي جسمها الشعر أو الوبر وتتكاثر بالولادة تُصنف ضمن:", options: ["الطيور", "الزواحف", "البرمائيات", "الثدييات"], answer: 3 },
-            { id: 12, category: categories[2], text: "العضو الرئيسي المسؤول عن ضخ الدم إلى جميع أنحاء جسم الإنسان هو:", options: ["الرئتان", "المعدة", "الدماغ", "القلب"], answer: 3 },
-            { id: 13, category: categories[2], text: "العملية التي يأخذ فيها الإنسان غاز الأكسجين ويخرج غاز ثاني أكسيد الكربون تُسمى:", options: ["الهضم", "الدوران", "التنفس", "الإخراج"], answer: 2 },
-            { id: 14, category: categories[2], text: "أي من السلوكيات الآتية تساهم في المحافظة على صحة الجهاز التنفسي؟", options: ["الجلوس مع المدخنين", "ممارسة الرياضة في الهواء الطلق", "إغلاق النوافذ دائماً", "تناول الأطعمة السريعة"], answer: 1 },
-            { id: 15, category: categories[2], text: "المركز الرئيسي للتحكم في جميع وظائف وأجهزة جسم الإنسان هو:", options: ["القلب", "المعدة", "الدماغ", "الكبد"], answer: 2 },
-
-            // المجال 4: الفيزياء (الضوء، الصوت، القوى) (5 أسئلة)
-            { id: 16, category: categories[3], text: "ارتداد أشعة الضوء عن سطح أملس ولامع (مثل المرآة) يُسمى:", options: ["انكسار الضوء", "انعكاس الضوء", "تحليل الضوء", "امتصاص الضوء"], answer: 1 },
-            { id: 17, category: categories[3], text: "الصوت يحتاج إلى وسط مادي لينتقل، ولذلك فإن الصوت لا ينتقل في:", options: ["الهواء", "الماء", "الفراغ", "الخشب"], answer: 2 },
-            { id: 18, category: categories[3], text: "القوة التي تسحب الأجسام نحو الأسفل باتجاه مركز الأرض هي:", options: ["قوة الاحتكاك", "القوة المغناطيسية", "الجاذبية الأرضية", "قوة الدفع"], answer: 2 },
-            { id: 19, category: categories[3], text: "في المغناطيس، الأقطاب المغناطيسية المتشابهة (شمالي مع شمالي):", options: ["تتجاذب", "تتنافر", "لا تتأثر", "تولد ضوءاً"], answer: 1 },
-            { id: 20, category: categories[3], text: "في الدارة الكهربائية البسيطة، ما هو الجزء الذي يُعتبر مصدر الطاقة؟", options: ["المفتاح الكهربائي", "أسلاك التوصيل", "المصباح", "البطارية"], answer: 3 },
-
-            // المجال 5: الأرض والفضاء (5 أسئلة)
-            { id: 21, category: categories[4], text: "ينتج عن دوران الأرض حول الشمس دورة كاملة (كل 365 يوماً وربع):", options: ["تعاقب الليل والنهار", "حدوث الفصول الأربعة", "المد والجزر", "خسوف القمر"], answer: 1 },
-            { id: 22, category: categories[4], text: "ينتج عن دوران الأرض حول محورها (نفسها) كل 24 ساعة:", options: ["الفصول الأربعة", "الكسوف", "تعاقب الليل والنهار", "سقوط الأمطار"], answer: 2 },
-            { id: 23, category: categories[4], text: "الكوكب الذي نعيش عليه ويُسمى الكوكب المائي هو كوكب:", options: ["المريخ", "المشتري", "الأرض", "الزهرة"], answer: 2 },
-            { id: 24, category: categories[4], text: "المصدر الرئيسي للضوء والحرارة على كوكب الأرض هو:", options: ["القمر", "الشمس", "النجوم البعيدة", "البراكين"], answer: 1 },
-            { id: 25, category: categories[4], text: "الطبقة السطحية من الأرض التي تتكون من فتات صخري ومواد عضوية وتنمو فيها النباتات هي:", options: ["التربة", "اللب", "الستار", "الغلاف الجوي"], answer: 0 }
-        ];
-
-        let currentStudent = { name: "", section: "" };
+        let testSettings = JSON.parse(localStorage.getItem('testSettings')) || { status: 'closed', duration: 40 };
+        let results = JSON.parse(localStorage.getItem('testResults')) || [];
+        let currentStudent = null;
         let timerInterval;
-        let testTimeLeft = 0;
-
-        // التهيئة والتنقل
-        function initSettings() {
-            let settings = JSON.parse(localStorage.getItem('grade5_settings_v2'));
-            if (!settings) {
-                settings = { status: 'closed', duration: 30 }; // المدة الافتراضية 30 دقيقة للـ 25 سؤال
-                localStorage.setItem('grade5_settings_v2', JSON.stringify(settings));
-            }
-            return settings;
-        }
+        let timeRemaining;
+        let answers = new Array(40).fill(null);
 
         function showSection(sectionId) {
-            const sections = ['role-selection', 'student-login', 'test-section', 'result-section', 'teacher-login', 'teacher-dashboard'];
-            sections.forEach(id => document.getElementById(id).classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
+            const sections = ['role-selection', 'student-login', 'teacher-login', 'test-section', 'result-section', 'teacher-dashboard'];
+            sections.forEach(sec => {
+                const el = document.getElementById(sec);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.remove('hidden');
         }
 
-        function saveTestSettings() {
-            const status = document.getElementById('test-status-toggle').value;
-            const duration = parseInt(document.getElementById('test-duration-input').value);
-            localStorage.setItem('grade5_settings_v2', JSON.stringify({ status, duration }));
+        function loginTeacher() {
+            const emailInput = document.getElementById('teacher-email');
+            const passInput = document.getElementById('teacher-password');
+            const errorEl = document.getElementById('teacher-error');
             
-            const msg = document.getElementById('settings-saved-msg');
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 2000);
+            if (!emailInput || !passInput || !errorEl) return;
+
+            const email = emailInput.value.trim();
+            const pass = passInput.value.trim();
+
+            if (email === 'ameenmatar@gmail.com' && pass === '123456') {
+                errorEl.classList.add('hidden');
+                emailInput.value = '';
+                passInput.value = '';
+                testSettings = JSON.parse(localStorage.getItem('testSettings')) || testSettings;
+                const statusToggle = document.getElementById('test-status-toggle');
+                const durationInput = document.getElementById('test-duration-input');
+                if (statusToggle) statusToggle.value = testSettings.status;
+                if (durationInput) durationInput.value = testSettings.duration;
+                renderResultsTable();
+                showSection('teacher-dashboard');
+            } else {
+                errorEl.classList.remove('hidden');
+            }
         }
 
-        // دخول الطالب وبدء الاختبار
         function checkTestAndStart() {
-            const nameInput = document.getElementById('student-name').value.trim();
-            const sectionInput = document.getElementById('student-section').value;
-            const errorElement = document.getElementById('student-error');
+            const nameEl = document.getElementById('student-name');
+            const sectionEl = document.getElementById('student-section');
+            const errorEl = document.getElementById('student-error');
+            
+            if (!nameEl || !sectionEl || !errorEl) return;
 
-            if (!nameInput || !sectionInput) {
-                errorElement.innerText = "الرجاء إدخال الاسم الثلاثي واختيار الشعبة!";
-                errorElement.classList.remove('hidden');
+            const name = nameEl.value.trim();
+            const section = sectionEl.value;
+            
+            if(!name || !section) {
+                errorEl.textContent = "الرجاء إدخال الاسم الثلاثي واختيار الشعبة!";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            
+            testSettings = JSON.parse(localStorage.getItem('testSettings')) || testSettings;
+            if(testSettings.status !== 'open') {
+                errorEl.textContent = "الاختبار مغلق حالياً من قبل المعلم.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            
+            const existingResult = results.find(r => r.name === name && r.section === section);
+            if(existingResult) {
+                errorEl.textContent = "لقد قمت بتقديم الاختبار مسبقاً!";
+                errorEl.classList.remove('hidden');
                 return;
             }
 
-            const settings = initSettings();
-            if (settings.status === 'closed') {
-                errorElement.innerText = "عذراً، الاختبار مغلق حالياً. بانتظار المعلم لفتحه.";
-                errorElement.classList.remove('hidden');
-                return;
-            }
-
-            errorElement.classList.add('hidden');
-            currentStudent.name = nameInput;
-            currentStudent.section = sectionInput;
+            currentStudent = { name, section };
+            const displayName = document.getElementById('display-student-name');
+            const displaySection = document.getElementById('display-student-section');
+            if (displayName) displayName.textContent = name;
+            if (displaySection) displaySection.textContent = section;
             
-            document.getElementById('display-student-name').innerText = currentStudent.name;
-            document.getElementById('display-student-section').innerText = currentStudent.section;
-            
-            testTimeLeft = settings.duration * 60;
-            
+            errorEl.classList.add('hidden');
             renderQuestions();
             showSection('test-section');
             startTimer();
         }
 
-        // المؤقت
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            fullQuestions.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'p-4 md:p-6 bg-gray-50 rounded-lg border-2 border-gray-200 shadow-sm';
+                
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-center p-3 cursor-pointer rounded-lg hover:bg-blue-100 transition border border-gray-200 bg-white">
+                            <input type="radio" name="q${index}" value="${optIdx}" class="form-radio h-5 w-5 text-blue-600" onchange="answers[${index}] = ${optIdx}">
+                            <span class="ml-2 mr-3 text-lg font-semibold">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qDiv.innerHTML = `
+                    <h4 class="text-xl font-bold mb-4 text-blue-900">${q.q}</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${optionsHtml}
+                    </div>
+                `;
+                container.appendChild(qDiv);
+            });
+        }
+
         function startTimer() {
+            timeRemaining = testSettings.duration * 60;
             updateTimerDisplay();
+            
+            if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                testTimeLeft--;
+                timeRemaining--;
                 updateTimerDisplay();
-                if (testTimeLeft <= 0) {
+                
+                if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
-                    alert("انتهى الوقت المخصص للاختبار! سيتم تسليم الإجابات تلقائياً.");
                     submitTest();
                 }
             }, 1000);
         }
 
         function updateTimerDisplay() {
-            let minutes = Math.floor(testTimeLeft / 60);
-            let seconds = testTimeLeft % 60;
-            document.getElementById('timer-display').innerText = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const mins = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
+            const secs = (timeRemaining % 60).toString().padStart(2, '0');
+            const displayEl = document.getElementById('timer-display');
+            if (!displayEl) return;
+            displayEl.textContent = `${mins}:${secs}`;
             
-            if (testTimeLeft < 60) {
-                document.getElementById('timer-display').parentElement.classList.replace('bg-red-100', 'bg-red-600');
-                document.getElementById('timer-display').parentElement.classList.replace('text-red-700', 'text-white');
+            if (timeRemaining < 300) {
+                const parent = displayEl.parentElement;
+                if (parent) {
+                    parent.classList.replace('bg-red-100', 'bg-red-600');
+                    parent.classList.replace('text-red-700', 'text-white');
+                    parent.classList.add('animate-pulse');
+                }
             }
         }
 
-        // رسم الأسئلة
-        function renderQuestions() {
-            const container = document.getElementById('questions-container');
-            container.innerHTML = "";
-            questions.forEach((q, index) => {
-                let optionsHtml = q.options.map((opt, i) => `
-                    <label class="block bg-gray-50 p-4 rounded-lg border-2 border-gray-200 hover:bg-blue-100 cursor-pointer font-bold text-xl transition">
-                        <input type="radio" name="q${q.id}" value="${i}" class="mr-3 ml-2 w-6 h-6 align-middle">
-                        <span class="align-middle">${opt}</span>
-                    </label>
-                `).join('');
-
-                const questionDiv = document.createElement('div');
-                questionDiv.className = "bg-white p-6 rounded-lg border-2 border-gray-200 shadow-sm";
-                questionDiv.innerHTML = `
-                    <h4 class="text-2xl font-bold mb-5 text-gray-800"><span class="text-blue-700">${index + 1}.</span> ${q.text}</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${optionsHtml}
-                    </div>
-                `;
-                container.appendChild(questionDiv);
-            });
-        }
-
-        // تصحيح وحفظ
         function submitTest() {
-            clearInterval(timerInterval);
-            let totalScore = 0;
-            let categoryScores = {
-                "الكائنات الحية والبيئة": 0,
-                "المادة وخصائصها": 0,
-                "جسم الإنسان": 0,
-                "الفيزياء (الضوء، الصوت، القوى)": 0,
-                "الأرض والفضاء": 0
-            };
-            let answersLog = {}; // تتبع إجابة كل سؤال (صحيح/خطأ) لأجل التحليل
-
-            questions.forEach(q => {
-                const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
-                const isCorrect = selected && parseInt(selected.value) === q.answer;
+            if (timerInterval) clearInterval(timerInterval);
+            
+            let score = 0;
+            let details = [];
+            
+            fullQuestions.forEach((q, index) => {
+                const studentAns = answers[index];
+                const isCorrect = studentAns === q.a;
+                if(isCorrect) score += 2.5;
                 
-                answersLog[q.id] = isCorrect ? 1 : 0;
-
-                if (isCorrect) {
-                    totalScore += 4; // كل سؤال بـ 4 علامات
-                    categoryScores[q.category] += 4;
-                }
+                details.push({
+                    question: q.q,
+                    studentAnswer: studentAns !== null ? q.options[studentAns] : 'لم يجب',
+                    correctAnswer: q.options[q.a],
+                    isCorrect: isCorrect
+                });
             });
-
-            document.getElementById('final-score').innerText = totalScore;
-            saveResult(currentStudent.name, currentStudent.section, totalScore, categoryScores, answersLog);
+            
+            const resultObj = {
+                name: currentStudent ? currentStudent.name : 'مجهول',
+                section: currentStudent ? currentStudent.section : '-',
+                score: score,
+                date: new Date().toLocaleString('ar-EG'),
+                details: details
+            };
+            
+            results.push(resultObj);
+            localStorage.setItem('testResults', JSON.stringify(results));
+            
+            const finalScoreEl = document.getElementById('final-score');
+            if (finalScoreEl) finalScoreEl.textContent = score;
             showSection('result-section');
         }
 
-        function saveResult(name, section, totalScore, categoryScores, answersLog) {
-            const results = JSON.parse(localStorage.getItem('grade5_results_v2')) || [];
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ar-EG') + " " + now.toLocaleTimeString('ar-EG');
-            
-            results.push({ 
-                name, 
-                section, 
-                totalScore, 
-                categoryScores, 
-                answersLog,
-                date: dateStr 
-            });
-            
-            localStorage.setItem('grade5_results_v2', JSON.stringify(results));
-        }
+        function saveTestSettings() {
+            const statusToggle = document.getElementById('test-status-toggle');
+            const durationInput = document.getElementById('test-duration-input');
+            if (!statusToggle || !durationInput) return;
 
-        // دخول المعلم
-        function loginTeacher() {
-            const email = document.getElementById('teacher-email').value;
-            const pass = document.getElementById('teacher-password').value;
+            testSettings.status = statusToggle.value;
+            testSettings.duration = parseInt(durationInput.value) || 40;
+            localStorage.setItem('testSettings', JSON.stringify(testSettings));
             
-            if (email === "ameenmatar@gmail.com" && pass === "987654") {
-                loadDashboard();
-                showSection('teacher-dashboard');
-                document.getElementById('teacher-error').classList.add('hidden');
-            } else {
-                document.getElementById('teacher-error').classList.remove('hidden');
+            const msg = document.getElementById('settings-saved-msg');
+            if (msg) {
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 2000);
             }
         }
 
-        function loadDashboard() {
-            const settings = initSettings();
-            document.getElementById('test-status-toggle').value = settings.status;
-            document.getElementById('test-duration-input').value = settings.duration;
-
-            const results = JSON.parse(localStorage.getItem('grade5_results_v2')) || [];
+        function renderResultsTable() {
             const tbody = document.getElementById('results-table-body');
-            tbody.innerHTML = "";
-
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
             if (results.length === 0) {
-                document.getElementById('no-data-msg').classList.remove('hidden');
-            } else {
-                document.getElementById('no-data-msg').classList.add('hidden');
-                results.forEach((res, index) => {
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-gray-50 transition";
-                    tr.innerHTML = `
-                        <td class="py-4 px-4 text-right border-b">${index + 1}</td>
-                        <td class="py-4 px-4 text-right border-b text-blue-800">${res.name}</td>
-                        <td class="py-4 px-4 text-center border-b">${res.section}</td>
-                        <td class="py-4 px-4 text-center border-b text-green-700">${res.totalScore}</td>
-                        <td class="py-4 px-4 text-right border-b text-sm text-gray-600">${res.date}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-        }
-
-        // التصدير الذكي للإكسل (ورقتين)
-        function exportAdvancedExcel() {
-            const results = JSON.parse(localStorage.getItem('grade5_results_v2')) || [];
-            if (results.length === 0) {
-                alert("لا توجد بيانات لتصديرها!");
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-gray-500">لا توجد نتائج مسجلة حتى الآن</td></tr>`;
                 return;
             }
 
-            // الورقة 1: سجل الطلاب المفصل
-            const studentsData = results.map((res, index) => ({
-                "الرقم": index + 1,
-                "الاسم الثلاثي": res.name,
-                "الصف": "الخامس",
-                "الشعبة": res.section,
-                "العلامة النهائية (من 100)": res.totalScore,
-                "الكائنات والبيئة (من 20)": res.categoryScores["الكائنات الحية والبيئة"],
-                "المادة وخصائصها (من 20)": res.categoryScores["المادة وخصائصها"],
-                "جسم الإنسان (من 20)": res.categoryScores["جسم الإنسان"],
-                "الفيزياء (من 20)": res.categoryScores["الفيزياء (الضوء، الصوت، القوى)"],
-                "الأرض والفضاء (من 20)": res.categoryScores["الأرض والفضاء"],
-                "وقت التسليم": res.date
-            }));
-
-            // الورقة 2: تحليل الأسئلة (Item Analysis)
-            const totalStudents = results.length;
-            const itemAnalysisData = questions.map(q => {
-                let correctCount = 0;
-                results.forEach(res => {
-                    if (res.answersLog && res.answersLog[q.id] === 1) {
-                        correctCount++;
-                    }
-                });
-                
-                let successRate = Math.round((correctCount / totalStudents) * 100);
-                let recommendation = "مفهوم متقن";
-                if (successRate < 50) recommendation = "يحتاج مراجعة عاجلة";
-                else if (successRate < 75) recommendation = "يحتاج تعزيز";
-
-                return {
-                    "رقم السؤال": q.id,
-                    "المجال / الموضوع": q.category,
-                    "نص السؤال": q.text,
-                    "عدد الإجابات الصحيحة": correctCount,
-                    "نسبة النجاح %": successRate + "%",
-                    "التوصية الآلية": recommendation
-                };
+            results.forEach((r, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+                tr.innerHTML = `
+                    <td class="py-3 px-4 border-b border-gray-200 text-right">${index + 1}</td>
+                    <td class="py-3 px-4 border-b border-gray-200 text-right">${r.name}</td>
+                    <td class="py-3 px-4 border-b border-gray-200 text-center">شعبة (${r.section})</td>
+                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                        <span class="px-3 py-1 rounded-full text-white ${r.score >= 50 ? 'bg-green-500' : 'bg-red-500'}">
+                            ${r.score}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 border-b border-gray-200 text-center text-sm text-gray-500">${r.date}</td>
+                `;
+                tbody.appendChild(tr);
             });
-
-            // إنشاء ملف الإكسل
-            const workbook = XLSX.utils.book_new();
-            
-            const studentsSheet = XLSX.utils.json_to_sheet(studentsData);
-            XLSX.utils.book_append_sheet(workbook, studentsSheet, "سجل العلامات المفصل");
-            
-            const analysisSheet = XLSX.utils.json_to_sheet(itemAnalysisData);
-            XLSX.utils.book_append_sheet(workbook, analysisSheet, "تحليل نقاط الضعف");
-
-            // تحميل الملف
-            XLSX.writeFile(workbook, "نتائج_وتحليل_الخامس_علوم.xlsx");
         }
 
         function clearData() {
-            if (confirm("تحذير: هل أنت متأكد من مسح جميع النتائج بشكل نهائي؟")) {
-                localStorage.removeItem('grade5_results_v2');
-                loadDashboard();
+            if(confirm('هل أنت متأكد من مسح جميع نتائج الطلاب؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                results = [];
+                localStorage.removeItem('testResults');
+                renderResultsTable();
             }
         }
+
+        function exportAdvancedExcel() {
+            if(results.length === 0) {
+                alert('لا توجد نتائج لتصديرها.');
+                return;
+            }
+            
+            const data = results.map((r, i) => {
+                const row = {
+                    'الرقم': i + 1,
+                    'اسم الطالب': r.name,
+                    'الشعبة': r.section,
+                    'العلامة من 100': r.score,
+                    'التقييم': r.score >= 90 ? 'ممتاز' : r.score >= 80 ? 'جيد جداً' : r.score >= 70 ? 'جيد' : r.score >= 50 ? 'مقبول' : 'ضعيف',
+                    'تاريخ التقديم': r.date
+                };
+                
+                r.details.forEach((d, qIdx) => {
+                    row[`س${qIdx + 1} (ص/خ)`] = d.isCorrect ? 'صحيح' : 'خاطئ';
+                });
+                
+                return row;
+            });
+
+            const worksheet = XLSX.utils.json_to_sheet(data);
+            
+            worksheet['!cols'] = [
+                { wch: 5 },
+                { wch: 25 },
+                { wch: 10 },
+                { wch: 15 },
+                { wch: 15 },
+                { wch: 20 }
+            ];
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "نتائج الاختبار");
+            
+            XLSX.writeFile(workbook, `نتائج_الاختبار_التشخيصي_علوم_رابع.xlsx`);
+        }
+
+        window.onload = () => {
+            showSection('role-selection');
+        };
     </script>
 </body>
 </html>
