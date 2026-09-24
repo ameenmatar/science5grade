@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الاختبار التشخيصي - رياضيات الخامس الأساسي</title>
+    <title>الاختبار التشخيصي - العلوم والحياة الخامس الأساسي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
@@ -55,11 +55,11 @@
                     <span>👨‍🏫 لوحة تحكم المعلم (النتائج)</span>
                 </button>
                 <h1 class="text-3xl font-bold text-gray-800 mb-2 mt-2 md:mt-0">مدرسة ذكور طمون الأساسية العليا</h1>
-                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث الرياضيات للصف الخامس الأساسي</h2>
+                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث العلوم والحياة للصف الخامس الأساسي</h2>
             </div>
 
             <div id="student-login" class="flex flex-col items-center bg-white p-10 rounded-xl shadow-lg border border-gray-100">
-                <h3 class="text-2xl font-bold mb-6 text-blue-700">أهلاً بك يا بطل الرياضيات!</h3>
+                <h3 class="text-2xl font-bold mb-6 text-blue-700">أهلاً بك يا بطل العلوم!</h3>
                 <div class="w-full max-w-md space-y-5">
                     <input type="text" id="student-name" placeholder="أدخل اسمك الثلاثي هنا..." class="border-2 border-gray-300 p-4 rounded-lg w-full text-center focus:outline-none focus:border-blue-500 text-lg font-bold">
                     <select id="student-section" class="border-2 border-gray-300 p-4 rounded-lg w-full text-center focus:outline-none focus:border-blue-500 text-lg font-bold">
@@ -88,7 +88,7 @@
                 </div>
                 
                 <div class="mb-4 bg-yellow-50 border border-yellow-300 p-4 rounded-lg text-yellow-800 font-bold text-center">
-                    يتكون الاختبار من 40 سؤالاً مقسمة حسب المهارات الأساسية. المدة الزمنية ساعة واحدة (60 دقيقة). كل سؤال بـ 2.5 علامة.
+                    يتكون الاختبار من أسئلة تقيس المفاهيم العلمية والمهارات الأساسية. المدة الزمنية ساعة واحدة (60 دقيقة).
                 </div>
 
                 <div id="questions-container" class="space-y-8 mb-8 bg-white p-2 md:p-6 rounded-lg border border-gray-100"></div>
@@ -110,7 +110,7 @@
 
             <div id="teacher-dashboard" class="hidden bg-white p-4 md:p-8 rounded-xl shadow-lg border border-gray-100">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-gray-200 pb-6 gap-4">
-                    <h3 class="text-3xl font-bold text-gray-800">لوحة تحكم المعلم أ. أبوطلال - نتائج رياضيات الخامس</h3>
+                    <h3 class="text-3xl font-bold text-gray-800">لوحة تحكم المعلم أ. أبوطلال - نتائج علوم الخامس</h3>
                     <button type="button" onclick="location.reload()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition shadow-md text-lg cursor-pointer">إغلاق اللوحة</button>
                 </div>
 
@@ -144,78 +144,35 @@
     <script>
         const skillSections = [
             {
-                skillName: "أولاً: الأعداد الكلية والقيمة المنزلية والتقريب",
+                skillName: "أولاً: الكائنات الحية وخصائصها",
                 questions: [
-                    { id: 0, q: "1. ما قيمة الرقم 5 في العدد 45,821؟", options: ["50", "500", "5000", "50,000"], a: 2 },
-                    { id: 32, q: "2. قرب العدد 47 إلى أقرب عشرة:", options: ["40", "45", "50", "60"], a: 2 },
-                    { id: 33, q: "3. قرب العدد 324 إلى أقرب مئة:", options: ["300", "350", "400", "320"], a: 0 },
-                    { id: 35, q: "4. ما ناتج طرح 1 من العدد 10,000؟", options: ["9,000", "9,999", "9,990", "9,099"], a: 1 }
+                    { id: 0, q: "1. أي من الكائنات الحية الآتية يعتبر من الكائنات الدقيقة؟", options: ["الأبقار", "البكتيريا", "الأسماك", "الطيور"], a: 1 },
+                    { id: 1, q: "2. الجهاز المسؤول عن تبادل الغازات في جسم الإنسان هو:", options: ["الجهاز الهضمي", "الجهاز التنفسي", "الجهاز البولي", "الجهاز العضلي"], a: 1 },
+                    { id: 2, q: "3. النباتات تصنع غذاءها بنفسها بعملية تسمى:", options: ["التنفس", "التبخر", "البناء الضوئي", "الامتصاص"], a: 2 }
                 ]
             },
             {
-                skillName: "ثانياً: العمليات الحسابية الأساسية (الجمع والطرح)",
+                skillName: "ثانياً: المادة وخصائصها وتحولاتها",
                 questions: [
-                    { id: 1, q: "1. ما هو الناتج الصحيح لعملية الجمع: 3,425 + 1,234؟", options: ["4,559", "4,659", "4,569", "5,659"], a: 1 },
-                    { id: 2, q: "2. ما هو ناتج طرح: 7,850 - 3,420؟", options: ["4,330", "4,430", "4,530", "4,420"], a: 1 }
+                    { id: 3, q: "1. ما الحالة التي تكون فيها للمادة شكل ثابت وحجم ثابت؟", options: ["الحالة الصلبة", "الحالة السائلة", "الحالة الغازية", "البلازما"], a: 0 },
+                    { id: 4, q: "2. تحول المادة من الحالة الصلبة إلى الحالة السائلة يسمى:", options: ["تبخر", "انصهار", "تكاثف", "تجمد"], a: 1 },
+                    { id: 5, q: "3. أداة القياس المستخدمة لقياس كتلة الجسم هي:", options: ["المخبار المدرج", "الميزان ذو الكفتين", "ميزان الحرارة", "المطاطة"], a: 1 }
                 ]
             },
             {
-                skillName: "ثالثاً: الضرب والقسمة وحل التطبيقات الحسابية",
+                skillName: "ثالثاً: الطاقة والقوى والكهرباء",
                 questions: [
-                    { id: 3, q: "1. ما ناتج ضرب العدد 35 في 10؟", options: ["35", "350", "3,500", "35,000"], a: 1 },
-                    { id: 4, q: "2. ما ناتج قسمة العدد 48 على 6؟", options: ["6", "7", "8", "9"], a: 2 },
-                    { id: 5, q: "3. ما هو العدد الذي إذا ضربته في 7 كان الناتج 56؟", options: ["6", "7", "8", "9"], a: 2 },
-                    { id: 25, q: "4. ما ناتج ضرب: 14 × 5؟", options: ["60", "65", "70", "75"], a: 2 },
-                    { id: 26, q: "5. مع أحمد 45 ديناراً، وزعها بالتساوي على أبنائه الثلاثة، فكم نصيب كل ابنة؟", options: ["12 ديناراً", "15 ديناراً", "18 ديناراً", "20 ديناراً"], a: 1 },
-                    { id: 34, q: "6. ما ناتج قسمة 350 على 10؟", options: ["35", "350", "3500", "3.5"], a: 0 },
-                    { id: 36, q: "7. إذا اشترى بائع 4 صناديق تفاح، في كل صندوق 25 تفاحة، فكم تفاحة مع البائع؟", options: ["80 تفاحة", "90 تفاحة", "100 تفاحة", "120 تفاحة"], a: 2 }
+                    { id: 6, q: "1. القوة التي تسحب الأشياء نحو مركز الأرض هي:", options: ["قوة الاحتكاك", "قوة المغناطيس", "الجاذبية الأرضية", "قوة التنافر"], a: 2 },
+                    { id: 7, q: "2. في الدارة الكهربائية البسيطة، المصدر المسؤول عن توفير الطاقة الكهربائية هو:", options: ["المصباح", "المفتاح", "الأسلاك", "القصاصة / البطارية"], a: 3 },
+                    { id: 8, q: "3. المواد التي تسمح للكهرباء بالمرور من خلالها تسمى:", options: ["مواد عازلة", "مواد موصلة", "مواد بلاستيكية", "مواد خشبية"], a: 1 }
                 ]
             },
             {
-                skillName: "رابعاً: الكسور العادية والكسور العشرية",
+                skillName: "رابعاً: الأرض والكون والفضاء",
                 questions: [
-                    { id: 6, q: "1. ما هو الكسر الذي يمثل الجزء المظلل إذا أكل أسامي قطعتين من فطيرة مقسمة إلى 8 قطع متساوية؟", options: ["2/8", "8/2", "6/8", "2/6"], a: 0 },
-                    { id: 7, q: "2. أي من الكسور الآتية يعتبر كسراً فعلياً (أو حقيقياً)؟", options: ["5/4", "7/3", "3/5", "9/2"], a: 2 },
-                    { id: 8, q: "3. ما أبسط صورة للكسر 4/8؟", options: ["1/4", "1/2", "2/3", "3/4"], a: 1 },
-                    { id: 9, q: "4. ما ناتج جمع الكسرين: 2/7 + 3/7؟", options: ["5/14", "5/7", "6/7", "1/7"], a: 1 },
-                    { id: 10, q: "5. اكتب الكسر العشري خمسة من عشرة (0.5) على صورة كسر عادي:", options: ["1/5", "5/10", "5/100", "1/20"], a: 1 },
-                    { id: 11, q: "6. أي الأعداد العشرية الآتية هو الأكبر؟", options: ["0.3", "0.35", "0.28", "0.09"], a: 1 },
-                    { id: 12, q: "7. ما ناتج جمع العشريين: 2.4 + 1.3؟", options: ["3.5", "3.7", "4.1", "3.8"], a: 1 },
-                    { id: 31, q: "8. ما هو الكسر الذي يساوية النصف (1/2) من بين الكسور الآتية؟", options: ["2/5", "3/6", "4/10", "3/8"], a: 1 },
-                    { id: 38, q: "9. كسر غير فعلي يعادل العدد الكسري 2 و 1/3:", options: ["5/3", "7/3", "6/3", "4/3"], a: 1 }
-                ]
-            },
-            {
-                skillName: "خامساً: القياس ووحدات الوقت والزمن",
-                questions: [
-                    { id: 13, q: "1. كم سنتيمترًا يوجد في المتر الواحد؟", options: ["10 سم", "100 سم", "1000 سم", "10,000 سم"], a: 1 },
-                    { id: 14, q: "2. كم غراماً يوجد في كيلوغرام واحد؟", options: ["10 غرام", "100 غرام", "1000 غرام", "100 غرام"], a: 2 },
-                    { id: 27, q: "3. كم دقيقة في الساعة الواحدة والربع؟", options: ["60 دقيقة", "75 دقيقة", "90 دقيقة", "100 دقيقة"], a: 1 },
-                    { id: 28, q: "4. إذا كانت الساعة الآن 3:30، كم تصبح بعد مضي 45 دقيقة؟", options: ["4:00", "4:15", "4:30", "5:00"], a: 1 }
-                ]
-            },
-            {
-                skillName: "سادساً: الهندسة، المحيط، المساحة، والأشكال الهندسية",
-                questions: [
-                    { id: 15, q: "1. ما محيط مربع طول ضلعه 5 سم؟", options: ["10 سم", "15 سم", "20 سم", "25 سم"], a: 2 },
-                    { id: 16, q: "2. ما مساحة مستطيل طوله 6 سم وعرضه 4 سم؟", options: ["20 سم مربع", "24 سم مربع", "10 سم مربع", "12 سم مربع"], a: 1 },
-                    { id: 17, q: "3. كم عدد أضلاع الشكل الرباعي؟", options: ["3 أضلاع", "4 أضلاع", "5 أضلاع", "6 أضلاع"], a: 1 },
-                    { id: 18, q: "4. ما هو اسم الزاوية التي قياسها يساوى 90 درجة تماماً؟", options: ["زاوية حادة", "زاوية منفرجة", "زاوية قائمة", "زاوية مستقيمة"], a: 2 },
-                    { id: 19, q: "5. الزاوية التي قياسها أكبر من 90 وأقل من 180 درجة تسمى:", options: ["زاوية قائمة", "زاوية حادة", "زاوية منفرجة", "زاوية مستقيمة"], a: 2 },
-                    { id: 29, q: "6. ما هو شكل وجه المكعب؟", options: ["مستطيل", "مربع", "دائرة", "مثلث"], a: 1 },
-                    { id: 30, q: "7. كم عدد رؤوس الهرم الثلاثي؟", options: ["3 رؤوس", "4 رؤوس", "5 رؤوس", "6 رؤوس"], a: 1 },
-                    { id: 37, q: "8. ما هي وحدة القياس المناسبة لقياس مساحة صف دراسي؟", options: ["المتر", "المتر المربع", "السم", "الكيلومتر"], a: 1 }
-                ]
-            },
-            {
-                skillName: "سابعاً: الأنماط، العوامل، الأعداد الأولية، وأولويات العمليات",
-                questions: [
-                    { id: 20, q: "1. ما العدد التالي في النمط الآتي: 3، 6، 9، 12، ...؟", options: ["14", "15", "16", "18"], a: 1 },
-                    { id: 21, q: "2. ما العدد المفقود في الجملة المفتوحة: 15 + [ ] = 23؟", options: ["6", "7", "8", "9"], a: 2 },
-                    { id: 22, q: "3. ما هو المضاعف المشترك الأصغر للعددين 2 و 3؟", options: ["5", "6", "9", "12"], a: 1 },
-                    { id: 23, q: "4. ما هي عوامل العدد 12 (الأعداد التي تقبل القسمة 12 عليها بدون باقي)؟", options: ["1, 2, 3, 4, 6, 12", "2, 4, 6", "3, 4, 6", "1, 12 فقط"], a: 0 },
-                    { id: 24, q: "5. أي الأعداد الآتية يعتبر عددًا أولياً (لا يقبل القسمة إلا على نفسه وعلى 1)؟", options: ["9", "11", "15", "21"], a: 1 },
-                    { id: 39, q: "6. ما هو ناتج: (5 + 3) × 2 حسب أولويات العمليات الحسابية؟", options: ["16", "13", "11", "10"], a: 0 }
+                    { id: 9, q: "1. الكوكب الأقرب إلى الشمس في المجموعة الشمسية هو:", options: ["الأرض", "عطارد", "المريخ", "المشتري"], a: 1 },
+                    { id: 10, q: "2. كم يستغرق كوكب الأرض ليدور حول الشمس دورة كاملة؟", options: ["يوماً واحداً", "شهراً واحداً", "سنة كاملة", "أسبوعاً واحداً"], a: 2 },
+                    { id: 11, q: "3. ظاهرة تعاقب الليل والنهار تحدث بسبب:", options: ["دوران الأرض حول الشمس", "دوران الأرض حول نفسها", "دوران القمر حول الأرض", "ميل محور الأرض"], a: 1 }
                 ]
             }
         ];
@@ -227,11 +184,11 @@
             });
         });
 
-        let results = JSON.parse(localStorage.getItem('testResults_math5_v2')) || [];
+        let results = JSON.parse(localStorage.getItem('testResults_science5_v1')) || [];
         let currentStudent = null;
         let timerInterval;
         let timeRemaining = 60 * 60;
-        let answers = new Array(40).fill(null);
+        let answers = new Array(fullQuestions.length).fill(null);
 
         function showSection(sectionId) {
             ['student-login', 'test-section', 'result-section', 'teacher-dashboard'].forEach(sec => {
@@ -273,11 +230,9 @@
                     errorEl.classList.remove('hidden');
                     return;
                 } else {
-                    // إذا كان مسجلاً مسبقاً ولم يسلم (دخل وبقي في الصفحة أو خرج ورجع)، نتابع معه بنفس سجله
                     currentStudent = existingResult;
                 }
             } else {
-                // حفظ الطالب فوراً في السجل بمجرد بدء الاختبار وقبل التسليم
                 currentStudent = {
                     name: name,
                     section: section,
@@ -287,7 +242,7 @@
                     details: []
                 };
                 results.push(currentStudent);
-                localStorage.setItem('testResults_math5_v2', JSON.stringify(results));
+                localStorage.setItem('testResults_science5_v1', JSON.stringify(results));
             }
 
             document.getElementById('display-student-name').textContent = name;
@@ -360,11 +315,12 @@
             
             let score = 0;
             let details = [];
+            const gradeMultiplier = 100 / fullQuestions.length;
             
             fullQuestions.forEach((q, index) => {
                 const studentAns = answers[index];
                 const isCorrect = studentAns === q.a;
-                if(isCorrect) score += 2.5;
+                if(isCorrect) score += gradeMultiplier;
                 
                 details.push({
                     question: q.q,
@@ -374,7 +330,8 @@
                 });
             });
             
-            // تحديث بيانات الطالب الموجود مسبقاً في المصفوفة
+            score = Math.round(score);
+            
             const targetIndex = results.findIndex(r => r.name === currentStudent.name && r.section === currentStudent.section);
             if (targetIndex !== -1) {
                 results[targetIndex].score = score;
@@ -383,7 +340,7 @@
                 results[targetIndex].details = details;
             }
             
-            localStorage.setItem('testResults_math5_v2', JSON.stringify(results));
+            localStorage.setItem('testResults_science5_v1', JSON.stringify(results));
             document.getElementById('final-score').textContent = score;
             showSection('result-section');
         }
@@ -422,7 +379,7 @@
         function clearData() {
             if(confirm('هل أنت متأكد من مسح جميع نتائج الطلاب؟')) {
                 results = [];
-                localStorage.removeItem('testResults_math5_v2');
+                localStorage.removeItem('testResults_science5_v1');
                 renderResultsTable();
             }
         }
@@ -452,8 +409,8 @@
 
             const worksheet = XLSX.utils.json_to_sheet(data);
             const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "نتائج رياضيات خامس");
-            XLSX.writeFile(workbook, `نتائج_رياضيات_خامس.xlsx`);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "نتائج علوم خامس");
+            XLSX.writeFile(workbook, `نتائج_علوم_خامس.xlsx`);
         }
 
         window.onload = () => {
