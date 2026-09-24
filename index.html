@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الاختبار التشخيصي - علوم الخامس الأساسي</title>
-    <!-- استدعاء Tailwind CSS -->
+    <title>الاختبار التشخيصي - رياضيات الخامس الأساسي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- استدعاء SheetJS لتصدير الإكسل -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #f3f4f6; padding: 20px; }
         .hidden { display: none !important; }
-        
-        /* نقش الكوفية */
         .keffiyeh-pattern {
             background-color: #f9fafb;
             background-image: 
@@ -22,8 +18,6 @@
             background-size: 28px 28px;
             background-position: 0 0, 14px 14px;
         }
-        
-        /* تصميم علم فلسطين الكامل كإطار للصفحة */
         .flag-wrapper {
             position: relative;
             background: linear-gradient(to bottom, #000000 33.33%, #ffffff 33.33%, #ffffff 66.66%, #16a34a 66.66%);
@@ -32,8 +26,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
         }
-        
-        /* المثلث الأحمر لعلم فلسطين */
         .flag-wrapper::before {
             content: '';
             position: absolute;
@@ -45,8 +37,6 @@
             clip-path: polygon(100% 0, 0 50%, 100% 100%);
             z-index: 1;
         }
-
-        /* حاوية المحتوى الداخلية */
         .content-container {
             position: relative;
             z-index: 10;
@@ -58,25 +48,18 @@
     </style>
 </head>
 <body class="text-gray-800">
-
-    <!-- الحاوية الرئيسية مع إطار العلم الكامل -->
     <div class="max-w-5xl mx-auto mt-4 mb-10 flag-wrapper">
-        
-        <!-- المحتوى الداخلي -->
         <div class="content-container keffiyeh-pattern p-4 md:p-8">
-            
-            <!-- الترويسة مع زر لوحة تحكم المعلم الواضح -->
             <div id="header-section" class="relative text-center mb-10 bg-white/95 p-6 rounded-lg shadow-md border-2 border-gray-200">
                 <button type="button" onclick="openTeacherDashboard()" class="absolute top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded-lg shadow transition cursor-pointer flex items-center gap-2">
                     <span>👨‍🏫 لوحة تحكم المعلم (النتائج)</span>
                 </button>
                 <h1 class="text-3xl font-bold text-gray-800 mb-2 mt-2 md:mt-0">مدرسة ذكور طمون الأساسية العليا</h1>
-                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث العلوم والحياة للصف الخامس الأساسي</h2>
+                <h2 class="text-xl text-green-700 font-bold mt-2">امتحان تشخيصي بمبحث الرياضيات للصف الخامس الأساسي</h2>
             </div>
 
-            <!-- شاشة دخول الطالب (تظهر مباشرة) -->
             <div id="student-login" class="flex flex-col items-center bg-white p-10 rounded-xl shadow-lg border border-gray-100">
-                <h3 class="text-2xl font-bold mb-6 text-blue-700">أهلاً بك يا بطل الصف الخامس!</h3>
+                <h3 class="text-2xl font-bold mb-6 text-blue-700">أهلاً بك يا بطل الرياضيات!</h3>
                 <div class="w-full max-w-md space-y-5">
                     <input type="text" id="student-name" placeholder="أدخل اسمك الثلاثي هنا..." class="border-2 border-gray-300 p-4 rounded-lg w-full text-center focus:outline-none focus:border-blue-500 text-lg font-bold">
                     <select id="student-section" class="border-2 border-gray-300 p-4 rounded-lg w-full text-center focus:outline-none focus:border-blue-500 text-lg font-bold">
@@ -92,9 +75,7 @@
                 <p id="student-error" class="text-red-500 mt-4 font-bold text-lg hidden"></p>
             </div>
 
-            <!-- شاشة الاختبار -->
             <div id="test-section" class="hidden bg-white/95 p-4 rounded-xl shadow-lg">
-                <!-- شريط معلومات الطالب والمؤقت -->
                 <div class="sticky top-0 bg-blue-50 p-4 rounded-lg mb-6 border-2 border-blue-200 shadow-md flex flex-col md:flex-row justify-between items-center z-50 gap-4">
                     <div class="text-lg">
                         <span class="font-bold text-gray-700">الطالب: <span id="display-student-name" class="text-blue-700 font-extrabold"></span></span>
@@ -106,19 +87,17 @@
                     </div>
                 </div>
                 
-                <!-- تعليمات الأسئلة -->
                 <div class="mb-4 bg-yellow-50 border border-yellow-300 p-4 rounded-lg text-yellow-800 font-bold text-center">
-                    يتكون الاختبار من 40 سؤالاً مقسمة على 4 مهارات رئيسية في منهاج العلوم والحياة. كل سؤال بـ 2.5 علامة (المجموع الكلي 100).
+                    يتكون الاختبار من 40 سؤالاً مقسمة حسب المهارات الأساسية. المدة الزمنية ساعة واحدة (60 دقيقة). كل سؤال بـ 2.5 علامة.
                 </div>
 
-                <div id="questions-container" class="space-y-6 mb-8 bg-white p-2 md:p-6 rounded-lg border border-gray-100"></div>
+                <div id="questions-container" class="space-y-8 mb-8 bg-white p-2 md:p-6 rounded-lg border border-gray-100"></div>
                 
                 <div class="text-center pb-6">
                     <button type="button" onclick="submitTest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-20 rounded-lg shadow-lg text-2xl transition border-b-4 border-green-800 cursor-pointer">تسليم الإجابات</button>
                 </div>
             </div>
 
-            <!-- شاشة النتيجة -->
             <div id="result-section" class="hidden text-center py-16 bg-white p-10 rounded-xl shadow-lg border border-gray-100">
                 <h2 class="text-4xl font-bold mb-6 text-gray-800">تم تسليم الاختبار بنجاح!</h2>
                 <p class="text-2xl mb-8 font-bold text-gray-600">العلامة النهائية:</p>
@@ -129,16 +108,14 @@
                 <button type="button" onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-12 rounded-lg text-xl shadow-md cursor-pointer">الصفحة الرئيسية</button>
             </div>
 
-            <!-- لوحة تحكم المعلم -->
             <div id="teacher-dashboard" class="hidden bg-white p-4 md:p-8 rounded-xl shadow-lg border border-gray-100">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-gray-200 pb-6 gap-4">
-                    <h3 class="text-3xl font-bold text-gray-800">لوحة تحكم المعلم أ. أبوطلال - نتائج الصف الخامس</h3>
+                    <h3 class="text-3xl font-bold text-gray-800">لوحة تحكم المعلم أ. أبوطلال - نتائج رياضيات الخامس</h3>
                     <button type="button" onclick="location.reload()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition shadow-md text-lg cursor-pointer">إغلاق اللوحة</button>
                 </div>
 
-                <!-- قسم النتائج والتصدير -->
                 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                    <h4 class="text-2xl font-bold text-gray-700">سجل نتائج الطلاب</h4>
+                    <h4 class="text-2xl font-bold text-gray-700">سجل نتائج الطلاب ودخولهم</h4>
                     <div class="flex gap-3 flex-wrap justify-center">
                         <button type="button" onclick="exportAdvancedExcel()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-sm md:text-lg cursor-pointer">تصدير إكسل ذكي (علامات + تحليل)</button>
                         <button type="button" onclick="clearData()" class="bg-gray-800 hover:bg-black text-white font-bold py-3 px-6 rounded-lg transition shadow-md text-sm md:text-lg cursor-pointer">مسح النتائج</button>
@@ -153,12 +130,10 @@
                                 <th class="py-4 px-4 text-right">اسم الطالب</th>
                                 <th class="py-4 px-4 text-center">الشعبة</th>
                                 <th class="py-4 px-4 text-center">العلامة</th>
-                                <th class="py-4 px-4 text-center">تاريخ التقديم</th>
+                                <th class="py-4 px-4 text-center">الحالة / وقت الدخول</th>
                             </tr>
                         </thead>
-                        <tbody id="results-table-body" class="divide-y divide-gray-200 font-bold">
-                            <!-- سيتم تعبئة النتائج هنا -->
-                        </tbody>
+                        <tbody id="results-table-body" class="divide-y divide-gray-200 font-bold"></tbody>
                     </table>
                 </div>
             </div>
@@ -167,60 +142,95 @@
     </div>
 
     <script>
-        const fullQuestions = [
-            // القسم الأول: مهارة فهم واستيعاب أنظمة جسم الإنسان الحيوية
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "1. ما هو الجهاز المسؤول عن تفتيت الطعام وهضمه واستخلاص المواد الغذائية منه؟", options: ["الجهاز التنفسي", "الجهاز الهضمي", "الجهاز الدوري", "الجهاز البولي"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "2. ما هي الوحدة الأساسية بناءً وتوظيفاً في جسم الكائن الحي؟", options: ["العضو", "النسيج", "الخلية", "الجهاز"], a: 2 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "3. أي من الخلايا التالية تستطيع صنع غذائها بنفسها لاحتوائها على بلاستيدات خضراء؟", options: ["خلايا الحيوان", "خلايا النبات", "خلايا الفطريات", "خلايا البكتيريا"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "4. ما الغاز الذي يُطرح خارج الجسم بعملية الزفير؟", options: ["الأكسجين", "ثاني أكسيد الكربون", "النيتروجين", "الهيدروجين"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "5. ما العضو الرئيسي في الجهاز التنفسي للإنسان؟", options: ["القلب", "الرئتان", "المعدة", "الكلية"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "6. ما هي الفضلات السائلة التي يتخلص منها الجسم عن طريق الكليتين؟", options: ["العرق فقط", "البول", "الدم الفاسد", "اللعاب"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "7. ما اسم الأوعية الدموية التي تنقل الدم المحمل بالأكسجين من القلب إلى أجزاء الجسم؟", options: ["الأوردة", "الشرايين", "الشعيرات الدموية", "القصيبات"], a: 1 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "29. ما هو العضو في الجهاز العصبي الذي يضم الدماغ والحبل الشوكي؟", options: ["الجهاز العصبي المركزي", "الجهاز العصبي الطرفي", "الأعصاب الحسية", "العضلات"], a: 0 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "30. الخلايا العصبية في الجسم تسمى:", options: ["نيورونات (عصبونات)", "كريات", "ألياف", "خلايا طلائية"], a: 0 },
-            { category: "القسم الأول: فهم واستيعاب أنظمة جسم الإنسان الحيوية", q: "39. ما هي العظام التي تحمي الدماغ في جسم الإنسان؟", options: ["القفص الصدري", "الجمجمة", "العمود الفقري", "الحوض"], a: 1 },
-
-            // القسم الثاني: مهارة استكشاف النباتات والبيئة والكائنات الحية الدقيقة
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "8. ما هي الكائنات الحية الدقيقة التي تُستخدم في صنع الخبز (الخميرة)؟", options: ["البكتيريا", "الفطريات", "الفيروسات", "الطحالب"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "14. ما نوع التكاثر في النباتات التي تنتج أزهاراً وثماراً بداخلها بذور؟", options: ["لازري", "بالأبواغ", "بالبذور (جنسي)", "بالعقل"], a: 2 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "15. ما الجزء المسؤول عن نقل الماء والملح من الجذور إلى باقي أجزاء النبات؟", options: ["اللحاء", "الخشب", "اللحاء والفلين", "البشرة"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "16. ما هو الجزء النباتي المسؤول عن نقل الغذاء المصنوع في الأوراق إلى باقي أجزاء النبات؟", options: ["الخشب", "اللحاء", "الشعيرات الجذرية", "النسغ"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "17. ما اسم عملية خروج الماء الزائد على شكل قطرات من أطراف أوراق النباتات في الصباح الباكر؟", options: ["التبخر", "النتح", "الإدماء (التعرق النباتي)", "التكاثف"], a: 2 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "38. أي من التالية تعتبر من طرق المحافظة على الموارد المائية في فلسطين؟", options: ["ترك الصنابير مفتوحة", "بناء الآبار الحجرية لجمع مياه الأمطار", "ري النباتات بماء مالح", "تلويث الينابيع"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "40. ما هو العضو الذي يحمي الرئتين والقلب؟", options: ["الجمجمة", "القفص الصدري", "عضض اليد", "عظم الفخذ"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "9. ما اسم الصخور الناتجة عن تبريد وتصلب الصهارة (الماغما) الخارجة من باطن الأرض؟", options: ["الصخور الرسوبية", "الصخور النارية", "الصخور المتحولة", "الحجر الجيري"], a: 1 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "26. أي من الآتي يعد مثالاً على الصخور الرسوبية؟", options: ["البازلت", "الجرانيت", "الحجر الجيري", "الرخام"], a: 2 },
-            { category: "القسم الثاني: استكشاف النباتات والبيئة والكائنات الحية الدقيقة", q: "27. عملية تكسير الصخور إلى أجزاء أصغر بفعل عوامل الجو تسمى:", options: ["تعرية", "تججوية (التجوية)", "ترسيب", "انصهار"], a: 1 },
-
-            // القسم الثالث: مهارة تحليل الظواهر الفلكية والجيولوجية والجوية
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "10. ما هو الغاز الأكثر نسبة في غلاف الأرض الجوي؟", options: ["الأكسجين", "ثاني أكسيد الكربون", "النيتروجين", "الهيدروجين"], a: 2 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "11. ما هي طبقة الغلاف الجوي القريبة جداً من سطح الأرض والتي تحدث فيها الظواهر الجوية؟", options: ["الستراتوسفير", "التروبوسفير", "الميزوسفير", "الثيرموسفير"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "12. ما الظاهرة الفلكية التي يحدث فيها حجب ضوء الشمس عن الأرض بواسطة القمر؟", options: ["الخسوف", "الكسوف", "المد والجزر", "الفصول الأربعة"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "13. ما الظاهرة الفلكية التي يدخل فيها القمر في ظل الأرض فيختفي ضوؤه تدريجياً؟", options: ["الكسوف", "الخسوف", "الشهب", "الشروق"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "28. نقل الفتات الصخري من مكان إلى آخر بفعل الرياح أو الماء يسمى:", options: ["تجوية", "تعرية (إنجراف)", "ترسيب", "تبلور"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "31. ما اسم الكواكب الأربعة القريبة من الشمس (عطارد، الزهرة، الأرض، المريخ)؟", options: ["الكواكب الخارجية", "الكواكب الداخلية (الصخرية)", "العمالقة الغازية", "الكواكب القزمة"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "32. ما اسم الكواكب البعيدة الضخمة (المشتري، زحل، أورانوس، نبتون)؟", options: ["الكواكب الداخلية", "الكواكب الغازية (الخارجية)", "الكواكب الترابية", "الكويكبات"], a: 1 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "33. ما هي الحالة الفيزيائية التي تكون فيها مسافات جزيئات المادة معدومة تقريباً وتتحرك حركة اهتزازية؟", options: ["الغازية", "السائلة", "الصلبة", "البلازما"], a: 2 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "34. تحول المادة من الحالة الصلبة مباشرة إلى الحالة الغازية دون المرور بالسائلة يسمى:", options: ["انصهار", "تبخر", "التسامي", "تجمُّد"], a: 2 },
-            { category: "القسم الثالث: تحليل الظواهر الفلكية والجيولوجية والجوية", q: "35. ما هي الأداة المستخدمة لقياس حجم جسم سائل بَدِل؟", options: ["الميزان", "المخبار المدرج", "الساعة", "المتر"], a: 1 },
-
-            // القسم الرابع: مهارة تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "18. القوة التي تنشأ بين سحطين متلامسين وتعيق حركة الأجسام هي:", options: ["الجاذبية", "الاحتكاك", "المغناطيسية", "الطفو"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "19. ما القوة التي تدفع الجسم إلى أعلى عندما يغمر في الماء؟", options: ["قوة الجاذبية", "قوة الطفو (الضغط السائل)", "قوة الاحتكاك", "الوزن"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "20. المواد التي لا تسمح بمرور التيار الكهربائي من خلالها تسمى:", options: ["مواد موصلة", "مواد عازلة", "مواد شبه موصلة", "مواد مغناطيسية"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "21. المسار المغلق الذي يسري فيه التيار الكهربائي يسمى:", options: ["دارة كهربائية", "مفتاح كهربائي", "مقاومة", "محول"], a: 0 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "22. ما هي قطبا المغناطيس الدائم؟", options: ["أحمر وأزرق", "شمالي وجنوبي", "موجب وسالب", "داخلي وخارجي"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "23. ماذا يحدث للقطبين المتشابهين في المغناطيسين عند تقريبهما من بعضهما؟", options: ["يتجاذبان", "يتنافران", "لا يتأثران", "يلتصقان"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "24. ما هو الجهاز المستخدم لقياس قوة الجاذبية الأرضية (الوزن)؟", options: ["الميزان ذو الكفتين", "الميزان النابضي", "ميزان الحرارة", "المتر"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "25. ما هي وحدة قياس القوة والوزن؟", options: ["الجرام", "النيوتن", "الكيلوجرام", "الجول"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "36. ما هو مقدار حيز المادة في الفضاء؟", options: ["الكتلة", "الحجم", "الكثافة", "الوزن"], a: 1 },
-            { category: "القسم الرابع: تطبيق المفاهيم الفيزيائية والقوى وخصائص المادة", q: "37. كمية المادة الموجودة في الجسم تسمى:", options: ["الحجم", "الكتلة", "الوزن", "الكثافة"], a: 1 }
+        const skillSections = [
+            {
+                skillName: "أولاً: الأعداد الكلية والقيمة المنزلية والتقريب",
+                questions: [
+                    { id: 0, q: "1. ما قيمة الرقم 5 في العدد 45,821؟", options: ["50", "500", "5000", "50,000"], a: 2 },
+                    { id: 32, q: "2. قرب العدد 47 إلى أقرب عشرة:", options: ["40", "45", "50", "60"], a: 2 },
+                    { id: 33, q: "3. قرب العدد 324 إلى أقرب مئة:", options: ["300", "350", "400", "320"], a: 0 },
+                    { id: 35, q: "4. ما ناتج طرح 1 من العدد 10,000؟", options: ["9,000", "9,999", "9,990", "9,099"], a: 1 }
+                ]
+            },
+            {
+                skillName: "ثانياً: العمليات الحسابية الأساسية (الجمع والطرح)",
+                questions: [
+                    { id: 1, q: "1. ما هو الناتج الصحيح لعملية الجمع: 3,425 + 1,234؟", options: ["4,559", "4,659", "4,569", "5,659"], a: 1 },
+                    { id: 2, q: "2. ما هو ناتج طرح: 7,850 - 3,420؟", options: ["4,330", "4,430", "4,530", "4,420"], a: 1 }
+                ]
+            },
+            {
+                skillName: "ثالثاً: الضرب والقسمة وحل التطبيقات الحسابية",
+                questions: [
+                    { id: 3, q: "1. ما ناتج ضرب العدد 35 في 10؟", options: ["35", "350", "3,500", "35,000"], a: 1 },
+                    { id: 4, q: "2. ما ناتج قسمة العدد 48 على 6؟", options: ["6", "7", "8", "9"], a: 2 },
+                    { id: 5, q: "3. ما هو العدد الذي إذا ضربته في 7 كان الناتج 56؟", options: ["6", "7", "8", "9"], a: 2 },
+                    { id: 25, q: "4. ما ناتج ضرب: 14 × 5؟", options: ["60", "65", "70", "75"], a: 2 },
+                    { id: 26, q: "5. مع أحمد 45 ديناراً، وزعها بالتساوي على أبنائه الثلاثة، فكم نصيب كل ابنة؟", options: ["12 ديناراً", "15 ديناراً", "18 ديناراً", "20 ديناراً"], a: 1 },
+                    { id: 34, q: "6. ما ناتج قسمة 350 على 10؟", options: ["35", "350", "3500", "3.5"], a: 0 },
+                    { id: 36, q: "7. إذا اشترى بائع 4 صناديق تفاح، في كل صندوق 25 تفاحة، فكم تفاحة مع البائع؟", options: ["80 تفاحة", "90 تفاحة", "100 تفاحة", "120 تفاحة"], a: 2 }
+                ]
+            },
+            {
+                skillName: "رابعاً: الكسور العادية والكسور العشرية",
+                questions: [
+                    { id: 6, q: "1. ما هو الكسر الذي يمثل الجزء المظلل إذا أكل أسامي قطعتين من فطيرة مقسمة إلى 8 قطع متساوية؟", options: ["2/8", "8/2", "6/8", "2/6"], a: 0 },
+                    { id: 7, q: "2. أي من الكسور الآتية يعتبر كسراً فعلياً (أو حقيقياً)؟", options: ["5/4", "7/3", "3/5", "9/2"], a: 2 },
+                    { id: 8, q: "3. ما أبسط صورة للكسر 4/8؟", options: ["1/4", "1/2", "2/3", "3/4"], a: 1 },
+                    { id: 9, q: "4. ما ناتج جمع الكسرين: 2/7 + 3/7؟", options: ["5/14", "5/7", "6/7", "1/7"], a: 1 },
+                    { id: 10, q: "5. اكتب الكسر العشري خمسة من عشرة (0.5) على صورة كسر عادي:", options: ["1/5", "5/10", "5/100", "1/20"], a: 1 },
+                    { id: 11, q: "6. أي الأعداد العشرية الآتية هو الأكبر؟", options: ["0.3", "0.35", "0.28", "0.09"], a: 1 },
+                    { id: 12, q: "7. ما ناتج جمع العشريين: 2.4 + 1.3؟", options: ["3.5", "3.7", "4.1", "3.8"], a: 1 },
+                    { id: 31, q: "8. ما هو الكسر الذي يساوية النصف (1/2) من بين الكسور الآتية؟", options: ["2/5", "3/6", "4/10", "3/8"], a: 1 },
+                    { id: 38, q: "9. كسر غير فعلي يعادل العدد الكسري 2 و 1/3:", options: ["5/3", "7/3", "6/3", "4/3"], a: 1 }
+                ]
+            },
+            {
+                skillName: "خامساً: القياس ووحدات الوقت والزمن",
+                questions: [
+                    { id: 13, q: "1. كم سنتيمترًا يوجد في المتر الواحد؟", options: ["10 سم", "100 سم", "1000 سم", "10,000 سم"], a: 1 },
+                    { id: 14, q: "2. كم غراماً يوجد في كيلوغرام واحد؟", options: ["10 غرام", "100 غرام", "1000 غرام", "100 غرام"], a: 2 },
+                    { id: 27, q: "3. كم دقيقة في الساعة الواحدة والربع؟", options: ["60 دقيقة", "75 دقيقة", "90 دقيقة", "100 دقيقة"], a: 1 },
+                    { id: 28, q: "4. إذا كانت الساعة الآن 3:30، كم تصبح بعد مضي 45 دقيقة؟", options: ["4:00", "4:15", "4:30", "5:00"], a: 1 }
+                ]
+            },
+            {
+                skillName: "سادساً: الهندسة، المحيط، المساحة، والأشكال الهندسية",
+                questions: [
+                    { id: 15, q: "1. ما محيط مربع طول ضلعه 5 سم؟", options: ["10 سم", "15 سم", "20 سم", "25 سم"], a: 2 },
+                    { id: 16, q: "2. ما مساحة مستطيل طوله 6 سم وعرضه 4 سم؟", options: ["20 سم مربع", "24 سم مربع", "10 سم مربع", "12 سم مربع"], a: 1 },
+                    { id: 17, q: "3. كم عدد أضلاع الشكل الرباعي؟", options: ["3 أضلاع", "4 أضلاع", "5 أضلاع", "6 أضلاع"], a: 1 },
+                    { id: 18, q: "4. ما هو اسم الزاوية التي قياسها يساوى 90 درجة تماماً؟", options: ["زاوية حادة", "زاوية منفرجة", "زاوية قائمة", "زاوية مستقيمة"], a: 2 },
+                    { id: 19, q: "5. الزاوية التي قياسها أكبر من 90 وأقل من 180 درجة تسمى:", options: ["زاوية قائمة", "زاوية حادة", "زاوية منفرجة", "زاوية مستقيمة"], a: 2 },
+                    { id: 29, q: "6. ما هو شكل وجه المكعب؟", options: ["مستطيل", "مربع", "دائرة", "مثلث"], a: 1 },
+                    { id: 30, q: "7. كم عدد رؤوس الهرم الثلاثي؟", options: ["3 رؤوس", "4 رؤوس", "5 رؤوس", "6 رؤوس"], a: 1 },
+                    { id: 37, q: "8. ما هي وحدة القياس المناسبة لقياس مساحة صف دراسي؟", options: ["المتر", "المتر المربع", "السم", "الكيلومتر"], a: 1 }
+                ]
+            },
+            {
+                skillName: "سابعاً: الأنماط، العوامل، الأعداد الأولية، وأولويات العمليات",
+                questions: [
+                    { id: 20, q: "1. ما العدد التالي في النمط الآتي: 3، 6، 9، 12، ...؟", options: ["14", "15", "16", "18"], a: 1 },
+                    { id: 21, q: "2. ما العدد المفقود في الجملة المفتوحة: 15 + [ ] = 23؟", options: ["6", "7", "8", "9"], a: 2 },
+                    { id: 22, q: "3. ما هو المضاعف المشترك الأصغر للعددين 2 و 3؟", options: ["5", "6", "9", "12"], a: 1 },
+                    { id: 23, q: "4. ما هي عوامل العدد 12 (الأعداد التي تقبل القسمة 12 عليها بدون باقي)؟", options: ["1, 2, 3, 4, 6, 12", "2, 4, 6", "3, 4, 6", "1, 12 فقط"], a: 0 },
+                    { id: 24, q: "5. أي الأعداد الآتية يعتبر عددًا أولياً (لا يقبل القسمة إلا على نفسه وعلى 1)؟", options: ["9", "11", "15", "21"], a: 1 },
+                    { id: 39, q: "6. ما هو ناتج: (5 + 3) × 2 حسب أولويات العمليات الحسابية؟", options: ["16", "13", "11", "10"], a: 0 }
+                ]
+            }
         ];
 
-        let results = JSON.parse(localStorage.getItem('testResults_grade5')) || [];
+        let fullQuestions = [];
+        skillSections.forEach(section => {
+            section.questions.forEach(q => {
+                fullQuestions[q.id] = q;
+            });
+        });
+
+        let results = JSON.parse(localStorage.getItem('testResults_math5_v2')) || [];
         let currentStudent = null;
         let timerInterval;
-        let timeRemaining = 60 * 60; // 60 دقيقة
+        let timeRemaining = 60 * 60;
         let answers = new Array(40).fill(null);
 
         function showSection(sectionId) {
@@ -256,59 +266,71 @@
                 return;
             }
             
-            const existingResult = results.find(r => r.name === name && r.section === section);
+            let existingResult = results.find(r => r.name === name && r.section === section);
             if(existingResult) {
-                errorEl.textContent = "لقد قمت بتقديم الاختبار مسبقاً!";
-                errorEl.classList.remove('hidden');
-                return;
+                if(existingResult.submitted) {
+                    errorEl.textContent = "لقد قمت بتقديم الاختبار مسبقاً ولا يمكنك إعادته!";
+                    errorEl.classList.remove('hidden');
+                    return;
+                } else {
+                    // إذا كان مسجلاً مسبقاً ولم يسلم (دخل وبقي في الصفحة أو خرج ورجع)، نتابع معه بنفس سجله
+                    currentStudent = existingResult;
+                }
+            } else {
+                // حفظ الطالب فوراً في السجل بمجرد بدء الاختبار وقبل التسليم
+                currentStudent = {
+                    name: name,
+                    section: section,
+                    score: "لم يسلم بعد",
+                    submitted: false,
+                    date: new Date().toLocaleString('ar-EG'),
+                    details: []
+                };
+                results.push(currentStudent);
+                localStorage.setItem('testResults_math5_v2', JSON.stringify(results));
             }
 
-            currentStudent = { name, section };
             document.getElementById('display-student-name').textContent = name;
             document.getElementById('display-student-section').textContent = section;
             
             errorEl.classList.add('hidden');
-            renderQuestions();
+            renderQuestionsBySkills();
             showSection('test-section');
             startTimer();
         }
 
-        function renderQuestions() {
+        function renderQuestionsBySkills() {
             const container = document.getElementById('questions-container');
             container.innerHTML = '';
             
-            let currentCategory = '';
+            skillSections.forEach(section => {
+                const skillHeader = document.createElement('div');
+                skillHeader.className = 'bg-blue-800 text-white font-bold text-xl p-4 rounded-lg shadow-md mt-6 mb-4';
+                skillHeader.textContent = section.skillName;
+                container.appendChild(skillHeader);
 
-            fullQuestions.forEach((q, index) => {
-                // إذا تغيرت المهارة/القسم، نضيف عنوان القسم الجديد أولاً
-                if (q.category !== currentCategory) {
-                    currentCategory = q.category;
-                    const catHeader = document.createElement('div');
-                    catHeader.className = 'bg-blue-800 text-white font-bold text-xl p-4 rounded-lg mt-8 mb-4 shadow';
-                    catHeader.textContent = currentCategory;
-                    container.appendChild(catHeader);
-                }
+                section.questions.forEach((q) => {
+                    const qDiv = document.createElement('div');
+                    qDiv.className = 'p-4 md:p-6 bg-gray-50 rounded-lg border-2 border-gray-200 shadow-sm mb-4';
+                    
+                    let optionsHtml = '';
+                    q.options.forEach((opt, optIdx) => {
+                        optionsHtml += `
+                            <label class="flex items-center p-3 cursor-pointer rounded-lg hover:bg-blue-100 transition border border-gray-200 bg-white">
+                                <input type="radio" name="q${q.id}" value="${optIdx}" class="form-radio h-5 w-5 text-blue-600" onchange="answers[${q.id}] = ${optIdx}">
+                                <span class="ml-2 mr-3 text-lg font-semibold">${opt}</span>
+                            </label>
+                        `;
+                    });
 
-                const qDiv = document.createElement('div');
-                qDiv.className = 'p-4 md:p-6 bg-gray-50 rounded-lg border-2 border-gray-200 shadow-sm mb-4';
-                
-                let optionsHtml = '';
-                q.options.forEach((opt, optIdx) => {
-                    optionsHtml += `
-                        <label class="flex items-center p-3 cursor-pointer rounded-lg hover:bg-blue-100 transition border border-gray-200 bg-white">
-                            <input type="radio" name="q${index}" value="${optIdx}" class="form-radio h-5 w-5 text-blue-600" onchange="answers[${index}] = ${optIdx}">
-                            <span class="ml-2 mr-3 text-lg font-semibold">${opt}</span>
-                        </label>
+                    qDiv.innerHTML = `
+                        <h4 class="text-xl font-bold mb-4 text-blue-900">${q.q}</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${optionsHtml}
+                        </div>
                     `;
+                    container.appendChild(qDiv);
                 });
-
-                qDiv.innerHTML = `
-                    <h4 class="text-xl font-bold mb-4 text-blue-900">${q.q}</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${optionsHtml}
-                    </div>
-                `;
-                container.appendChild(qDiv);
             });
         }
 
@@ -346,22 +368,22 @@
                 
                 details.push({
                     question: q.q,
-                    category: q.category,
                     studentAnswer: studentAns !== null ? q.options[studentAns] : 'لم يجب',
                     correctAnswer: q.options[q.a],
                     isCorrect: isCorrect
                 });
             });
             
-            results.push({
-                name: currentStudent.name,
-                section: currentStudent.section,
-                score: score,
-                date: new Date().toLocaleString('ar-EG'),
-                details: details
-            });
+            // تحديث بيانات الطالب الموجود مسبقاً في المصفوفة
+            const targetIndex = results.findIndex(r => r.name === currentStudent.name && r.section === currentStudent.section);
+            if (targetIndex !== -1) {
+                results[targetIndex].score = score;
+                results[targetIndex].submitted = true;
+                results[targetIndex].date = new Date().toLocaleString('ar-EG');
+                results[targetIndex].details = details;
+            }
             
-            localStorage.setItem('testResults_grade5', JSON.stringify(results));
+            localStorage.setItem('testResults_math5_v2', JSON.stringify(results));
             document.getElementById('final-score').textContent = score;
             showSection('result-section');
         }
@@ -378,15 +400,19 @@
             results.forEach((r, index) => {
                 const tr = document.createElement('tr');
                 tr.className = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+                
+                let scoreBadge = '';
+                if (r.submitted) {
+                    scoreBadge = `<span class="px-3 py-1 rounded-full text-white ${r.score >= 50 ? 'bg-green-500' : 'bg-red-500'}">${r.score}</span>`;
+                } else {
+                    scoreBadge = `<span class="px-3 py-1 rounded-full text-white bg-yellow-500">لم يسلم (دخل الاختبار)</span>`;
+                }
+
                 tr.innerHTML = `
                     <td class="py-3 px-4 border-b border-gray-200 text-right">${index + 1}</td>
                     <td class="py-3 px-4 border-b border-gray-200 text-right">${r.name}</td>
                     <td class="py-3 px-4 border-b border-gray-200 text-center">شعبة (${r.section})</td>
-                    <td class="py-3 px-4 border-b border-gray-200 text-center">
-                        <span class="px-3 py-1 rounded-full text-white ${r.score >= 50 ? 'bg-green-500' : 'bg-red-500'}">
-                            ${r.score}
-                        </span>
-                    </td>
+                    <td class="py-3 px-4 border-b border-gray-200 text-center">${scoreBadge}</td>
                     <td class="py-3 px-4 border-b border-gray-200 text-center text-sm text-gray-500">${r.date}</td>
                 `;
                 tbody.appendChild(tr);
@@ -396,7 +422,7 @@
         function clearData() {
             if(confirm('هل أنت متأكد من مسح جميع نتائج الطلاب؟')) {
                 results = [];
-                localStorage.removeItem('testResults_grade5');
+                localStorage.removeItem('testResults_math5_v2');
                 renderResultsTable();
             }
         }
@@ -412,19 +438,22 @@
                     'الرقم': i + 1,
                     'اسم الطالب': r.name,
                     'الشعبة': r.section,
-                    'العلامة من 100': r.score,
-                    'تاريخ التقديم': r.date
+                    'الحالة': r.submitted ? 'مُسلم' : 'لم يسلم',
+                    'العلامة من 100': r.submitted ? r.score : 'غير مكتمل',
+                    'وقت التقديم/الدخول': r.date
                 };
-                r.details.forEach((d, qIdx) => {
-                    row[`س${qIdx + 1}`] = d.isCorrect ? 'صحيح' : 'خاطئ';
-                });
+                if (r.submitted && r.details) {
+                    r.details.forEach((d, qIdx) => {
+                        row[`س${qIdx + 1}`] = d.isCorrect ? 'صحيح' : 'خاطئ';
+                    });
+                }
                 return row;
             });
 
             const worksheet = XLSX.utils.json_to_sheet(data);
             const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "نتائج خامس");
-            XLSX.writeFile(workbook, `نتائج_علوم_خامس.xlsx`);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "نتائج رياضيات خامس");
+            XLSX.writeFile(workbook, `نتائج_رياضيات_خامس.xlsx`);
         }
 
         window.onload = () => {
